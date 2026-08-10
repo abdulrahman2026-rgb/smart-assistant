@@ -10,7 +10,7 @@ exports.handler = async (event) => {
     if (!message) throw new Error("No message");
     const key = process.env.GEMINI_API_KEY;
     if (!key) throw new Error("GEMINI_API_KEY missing");
-    const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${key}`;
+    const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${key}`;
     const r = await fetch(url, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -21,6 +21,6 @@ exports.handler = async (event) => {
     const reply = j.candidates?.[0]?.content?.parts?.[0]?.text || "لم أفهم";
     return { statusCode: 200, headers, body: JSON.stringify({ reply }) };
   } catch (e) {
-    return { statusCode: 200, headers, body: JSON.stringify({ reply: "خطأ: " + e.message }) };
+    return { statusCode: 500, headers, body: JSON.stringify({ reply: "خطأ: " + e.message }) };
   }
 };
