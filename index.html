@@ -31,8 +31,9 @@ async function ask(){
   const d=await r.json();
   document.getElementById(id).innerText=d.reply;
  }catch(e){
-  document.getElementById(id).innerText='خطأ في المفتاح';
+  document.getElementById(id).innerText='خطأ في الاتصال';
  }
+ chat.scrollTop=chat.scrollHeight;
 }
 </script>
 </body>
